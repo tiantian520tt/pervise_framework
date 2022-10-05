@@ -77,7 +77,11 @@ PPPPPPPPPP            eeeeeeeeeeeeee   rrrrrrr                    vvv           
         "list":make_list,
         "connect":connect,
         "server":start_server,
-        'search':search_module
+        'search':search_module,
+        'exec':exec_command,
+        'run':run_command,
+        'wget':wget,
+        'curl':curl
     }
     while True:
         command = input("Pervise> ")

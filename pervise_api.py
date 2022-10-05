@@ -1,13 +1,16 @@
 # This is Pervise API PyFile
 import threading
 import time
-import time
 import socket
 import random
 import sys
 import os
 import color
 import hashlib
+import subprocess
+import urllib.request
+import requests
+
 current = sys.stdout
 class redirect:
     content = ""
@@ -37,7 +40,7 @@ def enctry(s,k): # s: string k: password
         encry_str = encry_str + temp
     return encry_str
 
-def dectry(p,k): # d: string k: password
+def dectry(p, k): # d: string k: password
     k *= 0xFFFF
     dec_str = ""
     for i,j in zip(p.split("_")[:-1],k):
@@ -92,7 +95,6 @@ def make_trojan(command,commands):
         color.printGreen('[*] Usage: make module (Tip: list)')
         return -1
     try:
-        #exec(cmds[1]+"."+...+"("+cmds[2]+","+cmds[3]+")")
         cmd = cmds[1]+"."+cmds[2]+"("
         for index in range(3,len(cmds)):
             cmd+="\""+cmds[index].replace("\\","\\\\")+"\""
@@ -100,11 +102,13 @@ def make_trojan(command,commands):
                 cmd+=','
         cmd+=")"
         exec(cmd)
-    except:
+    except Exception as e:
         color.printRed('[-] Error.')
+        color.printRed(str(e))
         try:
             exec(cmds[1]+".info()")
-        except:
+        except Exception as exc:
+            color.printRed(str(exc))
             color.printRed('[-] Bad module.')
 def make_list(command,commands):
     for library in libraries:
@@ -307,5 +311,84 @@ def start_server(command,commands):
     t = threading.Thread(target=server,args=(command,commands,),daemon=True)
     t.start()
 
+def wget(command,commands):
+    cmds = command.split()
+    try:
+        url = cmds[1]
+        path = cmds[2]
 
+        filename = url[url.rindex('/') + 1:]
+        print('filename = ' + filename)
 
+        downloaded = '0'
+
+        def download_listener(a, b, c):
+            per = 100.0 * a * b / c
+            if per > 100:
+                per = 100
+            new_downloaded = '%.1f' % per
+            nonlocal downloaded
+            if new_downloaded != downloaded:
+                downloaded = new_downloaded
+                color.printGreen('download %s%%  %s/%s' % (downloaded, a * b, c))
+
+        if not os.path.exists(path):
+            os.mkdir(path)
+
+        response = urllib.request.urlretrieve(url, path + filename, download_listener)
+    except Exception as e:
+        color.printRed('[-] Failed.')
+        color.printRed(str(e))
+        color.printGreen('Usage: wget [URL] [SAVE PATH]')
+        color.printGreen('Example: wget http://103.103.14.1/pervise.py D:\\')
+
+def curl(command,commands):
+    cmds = command.split()
+    try:
+        url = cmds[1]
+    except:
+        color.printGreen('Usage: curl [URL]')
+        return -1
+    try:
+        result = requests.get(url)
+        color.printYellow("Code: "+str(result.status_code()))
+        color.printGreen("Headers: ")
+        print(result.headers())
+        color.printRed("Content: ")
+        print(str(result.content))
+    except Exception as e:
+        color.printRed('[-] Failed.')
+        color.printRed(str(e))
+        return -1
+
+def run_command(command,commands):
+    cmds = command.split()
+    statement = ""
+    for index in range(1,len(cmds)):
+        statement+=cmds[index]+' '
+    p = subprocess.Popen(statement, shell=True, stdout=subprocess.PIPE)
+    while p.poll() is None:
+        if p.wait() is not 0:
+            color.printRed('[-] Bad system command.')
+            return -1
+        else:
+            re = p.stdout.readlines()
+            result = []
+            for i in range(len(re)):
+                res = re[i].decode('gbk').strip('\r\n')
+                result.append(res)
+            for line in result:
+                print(line)
+            return -1
+
+def exec_command(command,commands):
+    cmds = command.split()
+    cmd = ''
+    try:
+        for index in range(1,len(cmds)):
+            cmd+=cmds[index]+' '
+        exec(cmd)
+        return 0
+    except Exception as e:
+        color.printRed(str(e))
+        return -1
