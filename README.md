@@ -16,6 +16,8 @@ Currently implemented functions:
  - 它支持丰富的第三方开发格式，很容易与Pervise兼容，只需稍作修改。
  - Connect remotely to the server running Pervise and perform limited work.
  - 远程连接到运行Pervise的服务器并执行有限的工作。
+ - Use the powerful Prepper module to help you manage the host.
+ - 使用功能强大的Prepper模块来帮助您管理目标。
 
 # Usage
 IDE: Pycharm
