@@ -120,7 +120,7 @@ def search_module(command, commands):
         find_list = []
         keywords = command.split()
         if len(keywords) <= 1:
-            color.printGreen('Usage: search KEYWORD')
+            color.printGreen('Usage: search [KEYWORD]')
             color.printGreen('Example: search command')
             return -1
         for library in libraries:
@@ -131,7 +131,7 @@ def search_module(command, commands):
             color.printGreen(library)
         return 0
     except:
-        color.printGreen('Usage: search KEYWORD')
+        color.printGreen('Usage: search [KEYWORD]')
         color.printGreen('Example: search command')
         return -1
 

