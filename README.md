@@ -29,3 +29,9 @@ python pervise.py
 # Developer! Read me!!!
 If you want to develop modules for Pervise, you should refer to the existing modules. They are easy to understand.
 如果你想为Pervise开发模块，你最好参考现有的模块。它们很容易理解。
+
+# Tips
+pyinstaller.exe -F --hidden-import requests --hidden-import platform -w .\payload.py
+<br/>
+Use this pyinstaller command when packaging the Preparer Payload<br/>
+打包Preparer Payload时使用此pyinstaller命令
