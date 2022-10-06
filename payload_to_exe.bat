@@ -1,0 +1,1 @@
+pyinstaller.exe -F --hidden-import requests --hidden-import platform -w .\payload.py
