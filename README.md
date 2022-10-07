@@ -19,6 +19,7 @@ Currently implemented functions:
  - Use the powerful Prepper module to help you manage the host.
  - 使用功能强大的Prepper模块来帮助您管理目标。
 
+
 # Usage
 IDE: Pycharm
 Run Pervise.py
@@ -35,3 +36,10 @@ pyinstaller.exe -F --hidden-import requests --hidden-import platform -w .\payloa
 <br/>
 Use this pyinstaller command when packaging the Preparer Payload<br/>
 打包Preparer Payload时使用此pyinstaller命令
+
+# Update
+## 10/7/2022
+1. The color display is updated and compatible with the general display on Linux/Windows. The color module has been changed.
+![image](https://user-images.githubusercontent.com/64673335/194475448-b28459d5-2757-422f-a79b-d23965986e7c.png)
+2. Fix vulnerabilities related to the Prepper Payload. It can now be packaged into an exe for stable use. Please refer to "Tips" for packaging method.
+3. Successfully solved the compatibility problem on Windows Server 2012, and successfully compatible with Linux distributions such as Kali Linux/Ubuntu/CentOS, but still does not support systems before Windows Server 2012, which may cause exceptions.
