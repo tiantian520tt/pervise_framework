@@ -10,19 +10,19 @@ U|  _"\\ u\\| ___"|/U |  _"\\ u\\ \\   /"/u  ___    / __"| u\\| ___"|/
  |_|      |_____|   |_| \\_\\ U  \\_/-(_/U/| |\\u  |____/>> |_____|  
  ||>>_    <<   >>   //   \\\\_  //   .-,_|___|_,-.)(  (__)<<   >>  
 (__)__)  (__) (__) (__)  (__)(__)   \\_)-' '-(_/(__)    (__) (__) 
-    """
+"""
     logo2 = """
  _______                                 __                     
 |       \\                               |  \\                    
 | $$$$$$$\\  ______    ______  __     __  \\$$  _______   ______  
 | $$__/ $$ /      \\  /      \\|  \\   /  \\|  \\ /       \\ /      \\ 
-| $$    $$|  $$$$$$\\|  $$$$$$\\\\\\$$\\ /  $$| $$|  $$$$$$$|  $$$$$$\\\\
+| $$    $$|  $$$$$$\\|  $$$$$$\\\\\\$$\\ /  $$| $$|  $$$$$$$|  $$$$$$\\
 | $$$$$$$ | $$    $$| $$   \\$$ \\$$\\  $$ | $$ \\$$    \\ | $$    $$
 | $$      | $$$$$$$$| $$        \\$$ $$  | $$ _\\$$$$$$\\| $$$$$$$$
 | $$       \\$$     \\| $$         \\$$$   | $$|       $$ \\$$     \\\\
  \\$$        \\$$$$$$$ \\$$          \\$     \\$$ \\$$$$$$$   \\$$$$$$$
 
-    """
+"""
     logo3 = """
      _ __       ,----.                     ,-.-. .=-.-.  ,-,--.     ,----.  
   .-`.' ,`.  ,-.--` , \\  .-.,.---.  ,--.-./=/ ,//==/_ /,-.'-  _\\ ,-.--` , \\ 
@@ -33,7 +33,7 @@ U|  _"\\ u\\| ___"|/U |  _"\\ u\\ \\   /"/u  ___    / __"| u\\| ___"|/
 |==|,  |   |==|_  ,`-._|==|_  . ,'.  |==| -  ,/|==|- |/==/\\/ _ |==|_  ,`-._ 
 /==/ - |   /==/ ,     //==/  /\\ ,  ) \\==\\  _ / /==/. /\\==\\ - , /==/ ,     / 
 `--`---'   `--`-----`` `--`-`--`--'   `--`--'  `--`-`  `--`---'`--`-----``  
-    """
+"""
     logo4 = """
 
 
@@ -60,7 +60,7 @@ PPPPPPPPPP            eeeeeeeeeeeeee   rrrrrrr                    vvv           
 
 
 
-    """
+"""
     color.printGreen('[*] Loading libraries...')
     result = load_libraries()
     if result < 0:
@@ -68,8 +68,12 @@ PPPPPPPPPP            eeeeeeeeeeeeee   rrrrrrr                    vvv           
     else:
         color.printGreen(status.get(result))
     logos = [logo1, logo2, logo3, logo4]
-    color.printGreen(logos[random.randint(0, 3)])
-    color.printYellow('[!] Used: '+str(sys.argv))
+    logo = logos[random.randint(0, 3)]
+    colors = ['RED','YELLOW','GREEN','CYAN','LIGHTWHITE_EX','LIGHTRED_EX','LIGHTBLUE_EX','LIGHTGREEN_EX','LIGHTCYAN_EX']
+    for char in logo:
+        color.printColor(char,colors[random.randint(0,8)],'')
+
+
     commands = {
         "help":show_help,
         "info":show_info,
@@ -84,7 +88,10 @@ PPPPPPPPPP            eeeeeeeeeeeeee   rrrrrrr                    vvv           
         'curl':curl
     }
     while True:
-        command = input("Pervise> ")
+        prompt = "Pervise> "
+        for char in prompt:
+            color.printColor(char,colors[random.randint(0,8)],'')
+        command = input()
         if command.lower() == "exit":
             color.printGreen('[*] Goodbye.')
             exit()
