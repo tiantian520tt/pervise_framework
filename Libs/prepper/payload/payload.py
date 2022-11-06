@@ -19,7 +19,6 @@ def dectry(p,k):
 ip = '{PREPPER HOST}'
 port = {PREPPER PORT}
 md5 = '{PREPPER MD5}'
-
 while True:
     try:
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

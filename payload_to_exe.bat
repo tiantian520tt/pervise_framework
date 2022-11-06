@@ -1,1 +1,1 @@
-pyinstaller.exe -F --hidden-import requests --hidden-import platform -w .\payload.py
+pyinstaller.exe -F --hidden-import requests --hidden-import platform --hidden-import win32api --hidden-import win32con --hidden-import tkinter -w .\payload.py
