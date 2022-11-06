@@ -38,6 +38,9 @@ Use this pyinstaller command when packaging the Preparer Payload<br/>
 打包Preparer Payload时使用此pyinstaller命令
 
 # Update
+## 6/11/2022
+1. Added "about" user window.
+2. Fix bugs.
 ## 10/7/2022
 1. The color display is updated and compatible with the general display on Linux/Windows. The color module has been changed.
 ![image](https://user-images.githubusercontent.com/64673335/194475448-b28459d5-2757-422f-a79b-d23965986e7c.png)
